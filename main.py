@@ -1,6 +1,21 @@
+import os
+from dotenv import load_dotenv
 import requests
 from itertools import count
 from pprint import pprint  # debug only
+
+
+def get_superjob_vacancies(token):
+    superjob_vacancies_api_url = "https://api.superjob.ru/2.0/vacancies/"
+    headers = {"X-Api-App-Id": token}
+    response = requests.get(
+        superjob_vacancies_api_url,
+        headers=headers
+    )
+    response.raise_for_status()
+
+    for object in response.json()["objects"]:
+        pprint(object["profession"])
 
 
 def get_hh_vacancies_page(language, page=0):
@@ -65,6 +80,7 @@ def calculate_avg_salary(vacancies):
 
 
 def main():
+    load_dotenv()
     top_programming_languages = [
         "Javascript",
         "Python",
@@ -82,18 +98,23 @@ def main():
 
     language_vacancies = {}
 
-    for language in top_programming_languages:
-        response = get_hh_vacancies_page(language)
-        if response["found"] < 100: # magic number
-            continue
-        language_vacancies[language] = {} # avg_salary_stat
-        vacancies = get_all_hh_vacancies(language)
-        language_vacancies[language]["vacancies_found"] = response["found"]
-        avg_salary, vacancies_processed = calculate_avg_salary(vacancies)
-        language_vacancies[language]["average_salary"] = avg_salary
-        language_vacancies[language]["vacancies_processed"] = vacancies_processed
+
+    # for language in top_programming_languages:
+    #     response = get_hh_vacancies_page(language)
+    #     if response["found"] < 100: # magic number
+    #         continue
+    #     language_vacancies[language] = {} # avg_salary_stat
+    #     vacancies = get_all_hh_vacancies(language)
+    #     language_vacancies[language]["vacancies_found"] = response["found"]
+    #     avg_salary, vacancies_processed = calculate_avg_salary(vacancies)
+    #     language_vacancies[language]["average_salary"] = avg_salary
+    #     language_vacancies[language]["vacancies_processed"] = vacancies_processed
 
     pprint(language_vacancies)
+
+    api_key_superjob = os.getenv("API_KEY_SUPERJOB")
+    get_superjob_vacancies(api_key_superjob)
+
 
 
 if __name__ == "__main__":
