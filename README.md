@@ -69,10 +69,3 @@ It will take some time to retrieve and process the data (acceptable time is abou
 ### Project Goals
 
 The code is written for educational purposes on online-course for web-developers [dvmn.org](https://dvmn.org/).
-
-
-
-Project Goals
-The code is written for educational purposes on online-course for web-developers dvmn.org.
-
-
