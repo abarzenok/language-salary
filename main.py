@@ -60,10 +60,10 @@ def get_hh_vacancies_page(language, page=0):
             "text": profession_query,
             "search_field": "name",
             "page": page,
-            "industry": 7,  # magic number
-            "professional_role": 96,  # "name": "Программист, разработчик",
-            "area": 1,  # Moscow
-            "period": 30,  # Not older than days
+            "industry": 7,
+            "professional_role": 96,
+            "area": 1,
+            "period": 30,
         }
     )
     response.raise_for_status()
@@ -151,7 +151,7 @@ def get_hh_statistics_table(languages):
     languages_statistics = {}
     for language in languages:
         response = get_hh_vacancies_page(language)
-        if response["found"] < 100:  # magic number
+        if response["found"] < 100:
             continue
         languages_statistics[language] = {}
         vacancies = get_all_hh_vacancies(language)
@@ -172,7 +172,7 @@ def get_sj_statistics_table(token, languages):
             token,
             language,
         )
-        if not response["total"]:  # magic number sj has too few vacancies
+        if not response["total"]:
             continue
         languages_statistics[language] = {}
         vacancies = get_all_sj_vacancies(
