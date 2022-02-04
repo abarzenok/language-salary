@@ -147,7 +147,7 @@ def calculate_avg_salary(vacancies, salary_predictor):
     return avg_salary, vacancies_processed
 
 
-def get_hh_statistics_table(languages):
+def get_hh_statistics(languages):
     languages_statistics = {}
     for language in languages:
         response = get_hh_vacancies_page(language)
@@ -165,7 +165,7 @@ def get_hh_statistics_table(languages):
     return languages_statistics
 
 
-def get_sj_statistics_table(token, languages):
+def get_sj_statistics(token, languages):
     languages_statistics = {}
     for language in languages:
         response = get_sj_vacancies_page(
@@ -209,12 +209,12 @@ def main():
 
     print_table(
         "HeadHunter Moscow",
-        get_hh_statistics_table(top_programming_languages)
+        get_hh_statistics(top_programming_languages)
     )
 
     print_table(
         "SuperJob Moscow",
-        get_sj_statistics_table(
+        get_sj_statistics(
             api_key_superjob,
             top_programming_languages
         )
