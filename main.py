@@ -95,12 +95,8 @@ def get_sj_vacancies_page(token, language, page=0):
 
 
 def predict_rub_salary_hh(vacancy):
-    if not vacancy.get("salary"):
-        return
-    else:
-        salary = vacancy.get("salary")
-
-    if salary.get("currency") != "RUR":
+    salary = vacancy.get("salary")
+    if not salary or salary.get("currency") != "RUR":
         return
 
     return predict_salary(
