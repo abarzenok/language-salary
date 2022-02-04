@@ -120,15 +120,12 @@ def predict_rub_salary_sj(vacancy):
 
 
 def predict_salary(salary_from, salary_to):
-    predicted_salary = None
     if salary_from and salary_to:
-        predicted_salary = (salary_from + salary_to) / 2
+        return (salary_from + salary_to) / 2
     elif (not salary_from) and salary_to:
-        predicted_salary = salary_to * 0.8
+        return salary_to * 0.8
     elif salary_from and (not salary_to):
-        predicted_salary = salary_from * 1.2
-
-    return predicted_salary
+        return salary_from * 1.2
 
 
 def calculate_avg_salary(vacancies, salary_predictor):
